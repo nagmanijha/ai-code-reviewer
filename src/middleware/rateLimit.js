@@ -14,7 +14,7 @@ export const reviewLimiter = rateLimit({
 
 export const authLimiter = rateLimit({
     windowMs: 60 * 60 * 1000, // 1 hour
-    max: 5, // Limit each IP to 5 login attempts per hour
+    max: 10, // Limit each IP to 10 login attempts per hour
     message: {
         error: 'Too many authentication attempts',
         message: 'Please try again after an hour'

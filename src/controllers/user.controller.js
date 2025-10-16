@@ -10,7 +10,7 @@ const generateToken = (userId) => {
 };
 
 // User Registration
-export const register = async (req, res) => {
+ const register = async (req, res) => {
     try {
         const { username, email, password } = req.body;
         
@@ -75,7 +75,7 @@ export const register = async (req, res) => {
 };
 
 // User Login
-export const login = async (req, res) => {
+ const login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
@@ -130,7 +130,7 @@ export const login = async (req, res) => {
 };
 
 // Get User Profile with Stats
-export const getProfile = async (req, res) => {
+const getProfile = async (req, res) => {
     try {
         const user = await User.findById(req.user._id).select('-password');
         const reviewStats = await Suggestion.aggregate([
@@ -163,7 +163,7 @@ export const getProfile = async (req, res) => {
 };
 
 // Update User Preferences
-export const updatePreferences = async (req, res) => {
+ const updatePreferences = async (req, res) => {
     try {
         const { preferredLanguages, reviewDepth } = req.body;
         
@@ -192,3 +192,21 @@ export const updatePreferences = async (req, res) => {
         });
     }
 };
+
+ const logout = async (req, res) => {
+    try {
+        // For JWT, logout is typically handled on the client side by deleting the token.
+        res.json({
+            success: true,
+            message: 'Logout successful'
+        });
+    } catch (error) {
+        console.error('Logout error:', error);
+        res.status(500).json({
+            error: 'Logout failed',
+            message: 'Internal server error'
+        });
+    }
+};
+
+export  { register, login, getProfile, logout, updatePreferences };
