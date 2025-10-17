@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import connectDB from './configs/db.js';
 import aiRoutes from './routes/ai.routes.js';
 import userRoutes from './routes/user.routes.js';
+import dashboardRoutes from './routes/dashboard.routes.js';
 import healthRoutes from './routes/health.routes.js';
 import { reviewLimiter, authLimiter } from './middleware/rateLimit.js';
 import errorHandler from './middleware/errorHandler.js';
@@ -39,6 +40,7 @@ app.use('/users/register', authLimiter);
 app.use('/health', healthRoutes);
 app.use('/ai', aiRoutes);
 app.use('/users', userRoutes);
+app.use('/dashboard', dashboardRoutes); 
 
 // Basic route
 app.get('/', (req, res) => {
@@ -63,7 +65,8 @@ app.use( (req, res) => {
         availableEndpoints: {
             health: ['GET /health', 'GET /health/detailed', 'GET /health/ready'],
             auth: ['POST /users/register', 'POST /users/login', 'GET /users/profile'],
-            ai: ['POST /ai/get-review']
+            ai: ['POST /ai/get-review'],
+            dashboard: ['GET /dashboard/stats', 'GET /dashboard/profile', 'GET /dashboard/history']
         }
     });
 });
