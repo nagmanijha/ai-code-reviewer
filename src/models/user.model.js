@@ -27,18 +27,6 @@ const userSchema = new mongoose.Schema({
         enum: ['user', 'admin'],
         default: 'user'
     },
-    // reviewCount: {
-    //     type: Number,
-    //     default: 0
-    // },
-    languageCount: {
-        type: Number,
-        default: 0
-    },
-    codeQuality: {
-        type: Number,
-        default: 0
-    },
     preferences: {
         preferredLanguages: [String],
         reviewDepth: {

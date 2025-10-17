@@ -1,4 +1,3 @@
-// models/suggestion.model.js
 import mongoose from 'mongoose';
 
 const suggestionSchema = new mongoose.Schema({
@@ -23,19 +22,24 @@ const suggestionSchema = new mongoose.Schema({
     rating: {
         type: Number,
         min: 1,
-        max: 5
+        max: 5,
+        default: 4
     },
     tags: [String],
     isPublic: {
         type: Boolean,
         default: false
+    },
+    reviewTime: {
+        type: Number, 
+        default: 0
     }
 }, { 
     timestamps: true 
 });
 
-// Compound index for better query performance
+// Index for better query performance
 suggestionSchema.index({ userId: 1, createdAt: -1 });
-suggestionSchema.index({ language: 1, isPublic: 1 });
+suggestionSchema.index({ language: 1, userId: 1 });
 
 export default mongoose.model('Suggestion', suggestionSchema);
