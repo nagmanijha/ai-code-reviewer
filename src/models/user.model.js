@@ -27,7 +27,15 @@ const userSchema = new mongoose.Schema({
         enum: ['user', 'admin'],
         default: 'user'
     },
-    reviewCount: {
+    // reviewCount: {
+    //     type: Number,
+    //     default: 0
+    // },
+    languageCount: {
+        type: Number,
+        default: 0
+    },
+    codeQuality: {
         type: Number,
         default: 0
     },
@@ -41,6 +49,12 @@ const userSchema = new mongoose.Schema({
     }
 }, { 
     timestamps: true 
+});
+
+
+// Virtual for review count (will be populated in aggregation)
+userSchema.virtual('reviewCount').get(function() {
+    return 0; // This will be calculated in aggregation
 });
 
 // Index for better query performance
