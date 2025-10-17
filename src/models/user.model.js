@@ -45,8 +45,6 @@ userSchema.virtual('reviewCount').get(function() {
     return 0; // This will be calculated in aggregation
 });
 
-// Index for better query performance
-userSchema.index({ email: 1 });
-userSchema.index({ username: 1 });
+
 
 export default mongoose.model('User', userSchema);
